@@ -1,0 +1,2 @@
+cpp_app in cpp docker container send message to rabbitmq server in rabbitmq docker container, python_app in python docker container 
+receive message from rabbitmq server in rabbitmq docker container

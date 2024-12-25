@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  rabbitmq_member1:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_member1
+    privileged: true
+    environment:
+      RABBITMQ_ERLANG_COOKIE: 'my_secret_cookie'
+      RABBITMQ_NODENAME: 'rabbit@rabbitmq_member1'
+      RABBITMQ_DEFAULT_USER: 'admin'
+      RABBITMQ_DEFAULT_PASS: 'admin'
+    ports:
+      - '15674:15672' # Management UI
+      - '5674:5672'   # AMQP port
+    networks:
+      rabbitmq_cluster:
+        ipv4_address: 192.168.30.125
+
+  rabbitmq_member2:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_member2
+    privileged: true
+    environment:
+      RABBITMQ_ERLANG_COOKIE: 'my_secret_cookie'
+      RABBITMQ_NODENAME: 'rabbit@rabbitmq_member2'
+      RABBITMQ_DEFAULT_USER: 'admin'
+      RABBITMQ_DEFAULT_PASS: 'admin'
+    ports:
+      - '15675:15672' # Management UI
+      - '5675:5672'   # AMQP port
+    networks:
+      rabbitmq_cluster:
+        ipv4_address: 192.168.30.126
+
+networks:
+  rabbitmq_cluster:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.30.0/16

@@ -1,0 +1,8 @@
+# Tạo exchange (dạng direct)
+rabbitmqadmin -u user -p password declare exchange name=my_exchange type=direct
+
+# Tạo queue
+rabbitmqadmin -u user -p password declare queue name=my_queue
+
+# Liên kết queue với exchange bằng routing key
+rabbitmqadmin -u user -p password declare binding source=my_exchange destination=my_queue routing_key=my_key
